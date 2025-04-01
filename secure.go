@@ -122,9 +122,9 @@ type Config struct {
 	XFrameOptions string
 }
 
-// DefaultSecureConfig is the default Secure middleware config.
+// DefaultConfig is the default middleware config.
 // It provides a secure baseline for web applications but may need customization for specific requirements.
-var DefaultSecureConfig = Config{
+var DefaultConfig = Config{
 	Skipper:                   middleware.DefaultSkipper,
 	ContentSecurityPolicy:     "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self';",
 	CrossOriginEmbedderPolicy: "require-corp",
@@ -143,15 +143,15 @@ var DefaultSecureConfig = Config{
 
 // New returns a middleware with optional custom configuration.
 // This middleware adds various security-related HTTP headers to each response.
-// If no configuration is provided, it uses DefaultSecureConfig.
+// If no configuration is provided, it uses DefaultConfig.
 func New(config ...Config) echo.MiddlewareFunc {
-	cfg := DefaultSecureConfig
+	cfg := DefaultConfig
 	if len(config) > 0 {
 		cfg = config[0]
 	}
 
 	if cfg.Skipper == nil {
-		cfg.Skipper = DefaultSecureConfig.Skipper
+		cfg.Skipper = DefaultConfig.Skipper
 	}
 
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
