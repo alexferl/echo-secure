@@ -26,7 +26,7 @@ func TestNewWithConfig(t *testing.T) {
 	}{
 		{
 			name:   "Default config",
-			config: DefaultSecureConfig,
+			config: DefaultConfig,
 			expected: map[string]string{
 				echo.HeaderContentSecurityPolicy: "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self';",
 				HeaderCrossOriginEmbedderPolicy:  "require-corp",
@@ -177,12 +177,12 @@ func TestNew(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	assert.Equal(t, DefaultSecureConfig.ContentSecurityPolicy, rec.Header().Get(echo.HeaderContentSecurityPolicy))
-	assert.Equal(t, DefaultSecureConfig.CrossOriginEmbedderPolicy, rec.Header().Get(HeaderCrossOriginEmbedderPolicy))
-	assert.Equal(t, DefaultSecureConfig.CrossOriginOpenerPolicy, rec.Header().Get(HeaderCrossOriginOpenerPolicy))
-	assert.Equal(t, DefaultSecureConfig.CrossOriginResourcePolicy, rec.Header().Get(HeaderCrossOriginResourcePolicy))
-	assert.Equal(t, DefaultSecureConfig.PermissionsPolicy, rec.Header().Get(HeaderPermissionsPolicy))
-	assert.Equal(t, DefaultSecureConfig.ReferrerPolicy, rec.Header().Get(echo.HeaderReferrerPolicy))
-	assert.Equal(t, DefaultSecureConfig.XContentTypeOptions, rec.Header().Get(echo.HeaderXContentTypeOptions))
-	assert.Equal(t, DefaultSecureConfig.XFrameOptions, rec.Header().Get(echo.HeaderXFrameOptions))
+	assert.Equal(t, DefaultConfig.ContentSecurityPolicy, rec.Header().Get(echo.HeaderContentSecurityPolicy))
+	assert.Equal(t, DefaultConfig.CrossOriginEmbedderPolicy, rec.Header().Get(HeaderCrossOriginEmbedderPolicy))
+	assert.Equal(t, DefaultConfig.CrossOriginOpenerPolicy, rec.Header().Get(HeaderCrossOriginOpenerPolicy))
+	assert.Equal(t, DefaultConfig.CrossOriginResourcePolicy, rec.Header().Get(HeaderCrossOriginResourcePolicy))
+	assert.Equal(t, DefaultConfig.PermissionsPolicy, rec.Header().Get(HeaderPermissionsPolicy))
+	assert.Equal(t, DefaultConfig.ReferrerPolicy, rec.Header().Get(echo.HeaderReferrerPolicy))
+	assert.Equal(t, DefaultConfig.XContentTypeOptions, rec.Header().Get(echo.HeaderXContentTypeOptions))
+	assert.Equal(t, DefaultConfig.XFrameOptions, rec.Header().Get(echo.HeaderXFrameOptions))
 }
