@@ -13,41 +13,41 @@ go get github.com/alexferl/echo-secure
 package main
 
 import (
-	"net/http"
+    "net/http"
 
-	"github.com/alexferl/echo-secure"
-	"github.com/labstack/echo/v4"
+    "github.com/alexferl/echo-secure"
+    "github.com/labstack/echo/v4"
 )
 
 func main() {
-	e := echo.New()
+    e := echo.New()
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "ok")
-	})
+    e.Use(secure.New())
 
-	e.Use(secure.New())
+    e.GET("/", func(c echo.Context) error {
+        return c.String(http.StatusOK, "hello")
+    })
 
-	e.Logger.Fatal(e.Start("localhost:1323"))
+    e.Logger.Fatal(e.Start("localhost:1323"))
 }
 ```
 
 ```shell
 http http://127.0.0.1:1323
 HTTP/1.1 200 OK
-Content-Length: 2
+Content-Length: 5
 Content-Security-Policy: default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; form-action 'self';
 Content-Type: text/plain; charset=UTF-8
 Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 Cross-Origin-Resource-Policy: same-origin
-Date: Tue, 01 Apr 2025 02:17:23 GMT
+Date: Tue, 01 Apr 2025 02:29:34 GMT
 Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=()
 Referrer-Policy: no-referrer
 X-Content-Type-Options: nosniff
 X-Frame-Options: DENY
 
-ok
+hello
 ```
 
 ### Configuration

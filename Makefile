@@ -1,4 +1,4 @@
-.PHONY: dev audit cover cover-html fmt lint pre-commit run test tidy update-deps
+.PHONY: dev audit cover cover-html fmt lint pre-commit test tidy update-deps
 
 .DEFAULT: help
 help:
